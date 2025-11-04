@@ -14,13 +14,384 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      addiction_patterns: {
+        Row: {
+          id: string
+          intensity: number | null
+          last_updated: string | null
+          pattern_type: string
+          user_id: string
+          weekly_trend: Json | null
+        }
+        Insert: {
+          id?: string
+          intensity?: number | null
+          last_updated?: string | null
+          pattern_type: string
+          user_id: string
+          weekly_trend?: Json | null
+        }
+        Update: {
+          id?: string
+          intensity?: number | null
+          last_updated?: string | null
+          pattern_type?: string
+          user_id?: string
+          weekly_trend?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "addiction_patterns_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cbt_progress: {
+        Row: {
+          completed: boolean | null
+          completed_at: string | null
+          created_at: string | null
+          id: string
+          module_index: number
+          module_title: string
+          notes: string | null
+          user_id: string
+        }
+        Insert: {
+          completed?: boolean | null
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          module_index: number
+          module_title: string
+          notes?: string | null
+          user_id: string
+        }
+        Update: {
+          completed?: boolean | null
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          module_index?: number
+          module_title?: string
+          notes?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cbt_progress_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      circadian_data: {
+        Row: {
+          caffeine_cutoff_time: string | null
+          created_at: string | null
+          date: string
+          energy_curve: Json | null
+          id: string
+          light_exposure_minutes: number | null
+          melatonin_window_end: string | null
+          melatonin_window_start: string | null
+          user_id: string
+        }
+        Insert: {
+          caffeine_cutoff_time?: string | null
+          created_at?: string | null
+          date?: string
+          energy_curve?: Json | null
+          id?: string
+          light_exposure_minutes?: number | null
+          melatonin_window_end?: string | null
+          melatonin_window_start?: string | null
+          user_id: string
+        }
+        Update: {
+          caffeine_cutoff_time?: string | null
+          created_at?: string | null
+          date?: string
+          energy_curve?: Json | null
+          id?: string
+          light_exposure_minutes?: number | null
+          melatonin_window_end?: string | null
+          melatonin_window_start?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "circadian_data_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      dream_entries: {
+        Row: {
+          ai_analysis: string | null
+          content: string
+          created_at: string | null
+          date: string
+          emotional_tone: string | null
+          id: string
+          symbols: Json | null
+          user_id: string
+        }
+        Insert: {
+          ai_analysis?: string | null
+          content: string
+          created_at?: string | null
+          date?: string
+          emotional_tone?: string | null
+          id?: string
+          symbols?: Json | null
+          user_id: string
+        }
+        Update: {
+          ai_analysis?: string | null
+          content?: string
+          created_at?: string | null
+          date?: string
+          emotional_tone?: string | null
+          id?: string
+          symbols?: Json | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "dream_entries_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      guardian_interventions: {
+        Row: {
+          created_at: string | null
+          id: string
+          intervention_type: string
+          relapse_risk_score: number | null
+          success: boolean | null
+          timestamp: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          intervention_type: string
+          relapse_risk_score?: number | null
+          success?: boolean | null
+          timestamp?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          intervention_type?: string
+          relapse_risk_score?: number | null
+          success?: boolean | null
+          timestamp?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "guardian_interventions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mood_logs: {
+        Row: {
+          context: string | null
+          created_at: string | null
+          id: string
+          intensity: number | null
+          mood_type: string
+          notes: string | null
+          timestamp: string | null
+          user_id: string
+        }
+        Insert: {
+          context?: string | null
+          created_at?: string | null
+          id?: string
+          intensity?: number | null
+          mood_type: string
+          notes?: string | null
+          timestamp?: string | null
+          user_id: string
+        }
+        Update: {
+          context?: string | null
+          created_at?: string | null
+          id?: string
+          intensity?: number | null
+          mood_type?: string
+          notes?: string | null
+          timestamp?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mood_logs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string | null
+          full_name: string | null
+          id: string
+          onboarding_completed: boolean | null
+          sleep_goal_time: string | null
+          sleep_personality_type: string | null
+          updated_at: string | null
+          wake_goal_time: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          full_name?: string | null
+          id: string
+          onboarding_completed?: boolean | null
+          sleep_goal_time?: string | null
+          sleep_personality_type?: string | null
+          updated_at?: string | null
+          wake_goal_time?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          full_name?: string | null
+          id?: string
+          onboarding_completed?: boolean | null
+          sleep_goal_time?: string | null
+          sleep_personality_type?: string | null
+          updated_at?: string | null
+          wake_goal_time?: string | null
+        }
+        Relationships: []
+      }
+      sleep_sessions: {
+        Row: {
+          bedtime: string | null
+          created_at: string | null
+          date: string
+          duration_minutes: number | null
+          id: string
+          intervention_count: number | null
+          notes: string | null
+          phone_usage_minutes: number | null
+          quality_score: number | null
+          user_id: string
+          wake_time: string | null
+        }
+        Insert: {
+          bedtime?: string | null
+          created_at?: string | null
+          date: string
+          duration_minutes?: number | null
+          id?: string
+          intervention_count?: number | null
+          notes?: string | null
+          phone_usage_minutes?: number | null
+          quality_score?: number | null
+          user_id: string
+          wake_time?: string | null
+        }
+        Update: {
+          bedtime?: string | null
+          created_at?: string | null
+          date?: string
+          duration_minutes?: number | null
+          id?: string
+          intervention_count?: number | null
+          notes?: string | null
+          phone_usage_minutes?: number | null
+          quality_score?: number | null
+          user_id?: string
+          wake_time?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sleep_sessions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sleep_streaks: {
+        Row: {
+          best_streak: number | null
+          current_streak: number | null
+          id: string
+          last_successful_night: string | null
+          total_successful_nights: number | null
+          unlocked_rewards: Json | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          best_streak?: number | null
+          current_streak?: number | null
+          id?: string
+          last_successful_night?: string | null
+          total_successful_nights?: number | null
+          unlocked_rewards?: Json | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          best_streak?: number | null
+          current_streak?: number | null
+          id?: string
+          last_successful_night?: string | null
+          total_successful_nights?: number | null
+          unlocked_rewards?: Json | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sleep_streaks_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      calculate_sleep_score: {
+        Args: {
+          p_duration_minutes: number
+          p_intervention_count: number
+          p_phone_usage_minutes: number
+          p_quality_score: number
+        }
+        Returns: number
+      }
     }
     Enums: {
       [_ in never]: never

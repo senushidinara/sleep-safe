@@ -5,17 +5,16 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Sparkles, Sunrise, BookOpen, TrendingUp, Award } from "lucide-react";
 import { toast } from "sonner";
+import { useSleepData } from "@/hooks/useSleepData";
 import meditationImage from "@/assets/meditation-orbs.jpg";
 
 export default function DreamscapeTab() {
   const [dreamEntry, setDreamEntry] = useState("");
-  const [totalStreakDays] = useState(5);
+  const { streak, saveDream } = useSleepData();
 
-  const handleSaveDream = () => {
+  const handleSaveDream = async () => {
     if (dreamEntry.trim()) {
-      toast.success("Dream Saved", {
-        description: "AI is analyzing your dream patterns...",
-      });
+      await saveDream(dreamEntry);
       setDreamEntry("");
     }
   };
@@ -126,14 +125,14 @@ export default function DreamscapeTab() {
           </h3>
           <div className="mb-4">
             <p className="text-sm text-muted-foreground mb-2">
-              Current Streak: <span className="text-foreground font-bold">{totalStreakDays} nights</span>
+              Current Streak: <span className="text-foreground font-bold">{streak} nights</span>
             </p>
             <div className="flex gap-2">
               {[1, 2, 3, 4, 5, 7, 10].map((day) => (
                 <div
                   key={day}
                   className={`flex-1 h-12 rounded-lg flex items-center justify-center font-bold text-sm ${
-                    totalStreakDays >= day
+                    streak >= day
                       ? "bg-primary text-primary-foreground"
                       : "bg-muted/30 text-muted-foreground"
                   }`}
